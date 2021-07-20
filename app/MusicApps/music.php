@@ -43,7 +43,10 @@ abstract class music implements IMusic{
 
     private function getAppId(): int
     {
-        $this->app_id = DB::table('applications')->where('title', "=", $this->getAppName())->select(['id'])->get()[0]->id;
+        if(!$this->app_id)
+        {
+            $this->app_id = DB::table('applications')->where('title', "=", $this->getAppName())->select(['id'])->get()[0]->id;
+        }
 
         return $this->app_id;
     }
